@@ -1,32 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "timecontrol",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Time Control",
+  "description": "Control time easily with items!!!",
   "authors": [
-    "Me!"
+    "xHyroM"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://xhyrom.dev/",
+    "sources": "https://github.com/xhyrom-utils/timecontrol-fork-1.19.2"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/examplemod/icon.png",
+  "icon": "assets/timecontrol/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "dev.xhyrom.timecontrol.TimeControlMod"
     ],
     "client": [
-      "net.fabricmc.example.ClientInitilizer"
+      "dev.xhyrom.timecontrol.ClientInitilizer"
     ]
   },
   "mixins": [
-    "examplemod.mixins.json"
+    "timecontrol.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.19",

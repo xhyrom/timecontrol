@@ -1,0 +1,30 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.xhyrom.timecontrol.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ItemCooldownManagerMixin",
+    "MinecraftServerMixin",
+    "PlayerManagerMixin",
+    "ServerChunkManagerMixin",
+    "ServerItemCooldownManagerMixin",
+    "ServerPlayerEntityMixin",
+    "ServerPlayNetworkHandlerMixin",
+    "ServerWorldMixin"
+  ],
+  "client": [
+    "client.ClientPlayerEntityMixin",
+    "client.ClientWorldMixin",
+    "client.DeathScreenMixin",
+    "client.EntityMixin",
+    "client.EntityRenderDispatcherMixin",
+    "client.MinecraftClientMixin",
+    "client.ParticleManagerMixin",
+    "client.RenderTickCounterMixin",
+    "client.TextureManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

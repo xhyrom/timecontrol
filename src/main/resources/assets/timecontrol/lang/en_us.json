@@ -1,0 +1,6 @@
+{
+  "item.timecontrol.accelerator": "Zrychlení času",
+  "item.timecontrol.decelerator": "Zpomalení času",
+  "item.timecontrol.stopper": "Zastavení času",
+  "itemGroup.timecontrol.item_group": "Modifikace času"
+}
