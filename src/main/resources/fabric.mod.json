@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "examplemod",
   "version": "${version}",
 
   "name": "Example Mod",
@@ -23,13 +23,13 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "examplemod.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.14.19",
     "fabric-api": "*",
-    "minecraft": "~1.19.2",
+    "minecraft": "~1.19.3",
     "java": ">=17"
   },
   "suggests": {
