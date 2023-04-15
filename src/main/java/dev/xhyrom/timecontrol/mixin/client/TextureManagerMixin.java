@@ -15,6 +15,8 @@ public abstract class TextureManagerMixin {
         if (MinecraftClient.getInstance().world == null) {
             return;
         }
+        if (!(MinecraftClient.getInstance().world instanceof ClientWorldAccessor)) return;
+
         int timeStopperId = ((ClientWorldAccessor)(MinecraftClient.getInstance().world)).getTimeStopperId();
         if (timeStopperId == -1) {
             return;

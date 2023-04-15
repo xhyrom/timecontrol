@@ -17,6 +17,8 @@ public abstract class EntityMixin {
     public abstract int getId();
     @Inject(method={"changeLookDirection"}, at={@At(value="HEAD")}, cancellable=true)
     private void onChangeLookDirection(CallbackInfo ci) {
+        if (!(this.world instanceof ClientWorldAccessor)) return;
+
         int timeStopperId = ((ClientWorldAccessor)this.world).getTimeStopperId();
         if (timeStopperId == -1 || timeStopperId == this.getId()) {
             return;

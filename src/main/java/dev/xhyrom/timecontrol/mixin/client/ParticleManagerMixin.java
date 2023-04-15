@@ -27,6 +27,8 @@ public abstract class ParticleManagerMixin {
         if (this.world == null) {
             return;
         }
+        if (!(this.world instanceof ClientWorldAccessor)) return;
+
         int timeStopperId = ((ClientWorldAccessor)this.world).getTimeStopperId();
         if (timeStopperId == -1) {
             return;
@@ -38,7 +40,7 @@ public abstract class ParticleManagerMixin {
     @ModifyVariable(method={"renderParticles"}, at=@At(value="HEAD"), ordinal=0)
     private float modifyTickDelta(float tickDelta) {
         int timeStopperId;
-        if (this.world != null && (timeStopperId = ((ClientWorldAccessor)this.world).getTimeStopperId()) != -1) {
+        if (this.world != null && (this.world instanceof ClientWorldAccessor) && (timeStopperId = ((ClientWorldAccessor)this.world).getTimeStopperId()) != -1) {
             return 0.0f;
         }
         return tickDelta;

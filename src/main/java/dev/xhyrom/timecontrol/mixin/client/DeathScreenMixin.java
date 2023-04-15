@@ -18,7 +18,9 @@ public abstract class DeathScreenMixin
 
     @Inject(method={"render"}, at={@At(value="HEAD")}, cancellable=true)
     private void onRender(CallbackInfo ci) {
-        int timeStoppedId = ((ClientWorldAccessor)((Object)this.client.world)).getTimeStopperId();
+        if (!(this.client.world instanceof ClientWorldAccessor)) return;
+
+        int timeStoppedId = ((ClientWorldAccessor)(this.client.world)).getTimeStopperId();
         if (timeStoppedId == -1 || timeStoppedId == this.client.player.getId()) {
             return;
         }

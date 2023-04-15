@@ -31,12 +31,13 @@ public abstract class MinecraftClientMixin {
 
     @Inject(method={"tick"}, at={@At(value="HEAD")})
     private void onTick(CallbackInfo ci) {
-        if (this.world != null) {
-            ClientWorldAccessor clientWorldAccessor = (ClientWorldAccessor)(this.world);
+        if (this.world == null) return;
+        if (!(this.world instanceof ClientWorldAccessor)) return;
 
-            if (!(player.getInventory().getMainHandStack().getItem() instanceof TimeManipulationItem)) return;
-            this.inGameHud.setOverlayMessage(Text.of("Rychlost: " + new DecimalFormat("#.######").format(clientWorldAccessor.getTimeRate() * 100.0) + "%" + (clientWorldAccessor.getTimeStopperId() == -1 ? "" : " zastavený")), false);
-        }
+        ClientWorldAccessor clientWorldAccessor = (ClientWorldAccessor)(this.world);
+
+        if (!(player.getInventory().getMainHandStack().getItem() instanceof TimeManipulationItem)) return;
+        this.inGameHud.setOverlayMessage(Text.of("Rychlost: " + new DecimalFormat("#.######").format(clientWorldAccessor.getTimeRate() * 100.0) + "%" + (clientWorldAccessor.getTimeStopperId() == -1 ? "" : " zastavený")), false);
     }
 
     @Inject(method={"handleInputEvents"}, at={@At(value="HEAD")}, cancellable=true)
@@ -44,6 +45,8 @@ public abstract class MinecraftClientMixin {
         if (this.world == null || this.player == null) {
             return;
         }
+        if (!(this.world instanceof ClientWorldAccessor)) return;
+
         int timeStopperId = ((ClientWorldAccessor)((Object)this.world)).getTimeStopperId();
         if (timeStopperId == -1 || timeStopperId == this.player.getId()) {
             return;

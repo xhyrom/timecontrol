@@ -18,6 +18,8 @@ public abstract class EntityRenderDispatcherMixin {
 
     @ModifyVariable(method={"render"}, at=@At(value="HEAD"), ordinal=1)
     private float modifyTickDelta(float value, Entity entity, double x, double y, double z, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        if (!(this.world instanceof ClientWorldAccessor)) return 0.0f;
+
         int timeStopperId = ((ClientWorldAccessor)(this.world)).getTimeStopperId();
         if (timeStopperId == -1 || timeStopperId == entity.getId()) {
             return value;

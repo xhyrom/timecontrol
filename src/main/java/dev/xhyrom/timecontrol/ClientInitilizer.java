@@ -8,6 +8,8 @@ public class ClientInitilizer implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(TimeControlMod.CHANNEL_TIME_STATUS, (client, handler, buf, responseSender) -> {
+            if (!(client.world instanceof ClientWorldAccessor)) return;
+
             double timeRate = buf.readDouble();
             int timeStopperId = buf.readInt();
             client.execute(() -> ((ClientWorldAccessor) client.world).updateTimeStatus(timeRate, timeStopperId));
