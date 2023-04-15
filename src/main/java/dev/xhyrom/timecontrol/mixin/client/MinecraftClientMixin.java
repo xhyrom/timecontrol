@@ -1,6 +1,7 @@
 package dev.xhyrom.timecontrol.mixin.client;
 
 import dev.xhyrom.timecontrol.accessor.ClientWorldAccessor;
+import dev.xhyrom.timecontrol.items.TimeManipulationItem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -32,6 +33,8 @@ public abstract class MinecraftClientMixin {
     private void onTick(CallbackInfo ci) {
         if (this.world != null) {
             ClientWorldAccessor clientWorldAccessor = (ClientWorldAccessor)(this.world);
+
+            if (!(player.getInventory().getMainHandStack().getItem() instanceof TimeManipulationItem)) return;
             this.inGameHud.setOverlayMessage(Text.of("Rychlost: " + new DecimalFormat("#.######").format(clientWorldAccessor.getTimeRate() * 100.0) + "%" + (clientWorldAccessor.getTimeStopperId() == -1 ? "" : " zastavený")), false);
         }
     }
