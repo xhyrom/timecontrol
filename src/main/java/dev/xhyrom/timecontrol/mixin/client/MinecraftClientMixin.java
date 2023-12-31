@@ -37,7 +37,26 @@ public abstract class MinecraftClientMixin {
         ClientWorldAccessor clientWorldAccessor = (ClientWorldAccessor)(this.world);
 
         if (!(player.getInventory().getMainHandStack().getItem() instanceof TimeManipulationItem)) return;
-        this.inGameHud.setOverlayMessage(Text.of("Rychlost: " + new DecimalFormat("#.######").format(clientWorldAccessor.getTimeRate() * 100.0) + "%" + (clientWorldAccessor.getTimeStopperId() == -1 ? "" : " zastavený")), false);
+
+        if (clientWorldAccessor.getTimeStopperId() != -1) {
+            this.inGameHud.setOverlayMessage(
+                    Text.translatable(
+                            "overlay.timecontrol.rate.stopped",
+                            new DecimalFormat("#.######")
+                                    .format(clientWorldAccessor.getTimeRate() * 100.0) + "%"
+                    ),
+                    false
+            );
+        } else {
+            this.inGameHud.setOverlayMessage(
+                    Text.translatable(
+                            "overlay.timecontrol.rate",
+                            new DecimalFormat("#.######")
+                                    .format(clientWorldAccessor.getTimeRate() * 100.0) + "%"
+                    ),
+                    false
+            );
+        }
     }
 
     @Inject(method={"handleInputEvents"}, at={@At(value="HEAD")}, cancellable=true)

@@ -10,9 +10,9 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-    public static final TimeManipulationItem ACCELERATOR = new TimeManipulationItem(new FabricItemSettings().maxCount(1), Type.ACCELERATOR);
-    public static final TimeManipulationItem DECELERATOR = new TimeManipulationItem(new FabricItemSettings().maxCount(1), Type.DECELERATOR);
-    public static final TimeManipulationItem STOPPER = new TimeManipulationItem(new FabricItemSettings().maxCount(1), Type.STOPPER);
+    public static final TimeManipulationItem ACCELERATOR = new TimeManipulationItem(new FabricItemSettings().maxCount(1), TimeManipulationItem.Type.ACCELERATOR);
+    public static final TimeManipulationItem DECELERATOR = new TimeManipulationItem(new FabricItemSettings().maxCount(1), TimeManipulationItem.Type.DECELERATOR);
+    public static final TimeManipulationItem STOPPER = new TimeManipulationItem(new FabricItemSettings().maxCount(1), TimeManipulationItem.Type.STOPPER);
     public static final ItemGroup ITEM_GROUP = FabricItemGroup.builder(new Identifier("timecontrol", "item_group"))
             .icon(() -> new ItemStack(ACCELERATOR))
             .build();

@@ -3,13 +3,13 @@ package dev.xhyrom.timecontrol.accessor;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public interface MinecraftServerAccessor {
-    public double getTimeRate();
+    double getTimeRate();
 
-    public void setTimeRate(double var1);
+    void setTimeRate(double var1);
 
-    public ServerPlayerEntity getTimeStopper();
+    ServerPlayerEntity getTimeStopper();
 
-    public void setTimeStopper(ServerPlayerEntity var1);
+    void setTimeStopper(ServerPlayerEntity var1);
 
-    public void sendTimeStatus(ServerPlayerEntity var1);
+    void sendTimeStatus(ServerPlayerEntity var1);
 }

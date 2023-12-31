@@ -35,10 +35,10 @@ public class TimeManipulationItem extends Item {
         }
         return TypedActionResult.success(playerEntity.getStackInHand(hand));
     }
-}
 
-enum Type {
-    ACCELERATOR,
-    DECELERATOR,
-    STOPPER;
+    public enum Type {
+        ACCELERATOR,
+        DECELERATOR,
+        STOPPER;
+    }
 }

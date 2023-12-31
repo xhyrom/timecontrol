@@ -8,6 +8,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Util;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +22,9 @@ import java.util.function.BooleanSupplier;
 public class MinecraftServerMixin implements MinecraftServerAccessor {
     @Shadow
     private PlayerManager playerManager;
+    @Unique
     private double timeRate = 1.0;
+    @Unique
     private UUID timeStopperId = Util.NIL_UUID;
 
     @Override

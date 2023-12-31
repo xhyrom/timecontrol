@@ -1,6 +1,8 @@
 {
-  "item.timecontrol.accelerator": "Zrychlení času",
-  "item.timecontrol.decelerator": "Zpomalení času",
-  "item.timecontrol.stopper": "Zastavení času",
-  "itemGroup.timecontrol.item_group": "Modifikace času"
+  "item.timecontrol.accelerator": "Time Accelerator",
+  "item.timecontrol.decelerator": "Time Decelerator",
+  "item.timecontrol.stopper": "Time Stopper",
+  "itemGroup.timecontrol.item_group": "Time Control",
+  "overlay.timecontrol.rate": "Time rate: %s",
+  "overlay.timecontrol.rate.stopped": "Time rate: %s (stopped)"
 }

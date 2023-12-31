@@ -1,7 +1,7 @@
 package dev.xhyrom.timecontrol.accessor;
 
 public interface ServerItemCooldownManagerAccessor {
-    public long getTimeManipulationTime();
+    long getTimeManipulationTime();
 
-    public void setTimeManipulationTime(long var1);
+    void setTimeManipulationTime(long var1);
 }
