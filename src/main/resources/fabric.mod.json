@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Time Control",
-  "description": "Control time easily with items!!!",
+  "description": "Control time easily with magic items",
   "authors": [
     "xHyroM"
   ],
@@ -28,12 +28,9 @@
     "timecontrol.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.19",
+    "fabricloader": ">=0.15.0",
     "fabric-api": "*",
-    "minecraft": "~1.19.3",
+    "minecraft": "~1.20.4",
     "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
