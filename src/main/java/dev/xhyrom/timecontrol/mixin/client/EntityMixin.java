@@ -12,9 +12,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value={Entity.class})
 public abstract class EntityMixin {
     @Shadow
-    public World world;
+    private World world;
     @Shadow
     public abstract int getId();
+
     @Inject(method={"changeLookDirection"}, at={@At(value="HEAD")}, cancellable=true)
     private void onChangeLookDirection(CallbackInfo ci) {
         if (!(this.world instanceof ClientWorldAccessor)) return;

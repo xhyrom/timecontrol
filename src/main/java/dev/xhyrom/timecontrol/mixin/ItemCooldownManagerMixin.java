@@ -20,6 +20,6 @@ public class ItemCooldownManagerMixin {
         if (progress < 0.0f || progress >= 1.0f) {
             progress = 0.0f;
         }
-        cir.setReturnValue(Float.valueOf(progress));
+        cir.setReturnValue(progress);
     }
 }

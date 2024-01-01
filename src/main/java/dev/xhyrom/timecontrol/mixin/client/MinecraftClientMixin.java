@@ -66,7 +66,7 @@ public abstract class MinecraftClientMixin {
         }
         if (!(this.world instanceof ClientWorldAccessor)) return;
 
-        int timeStopperId = ((ClientWorldAccessor)((Object)this.world)).getTimeStopperId();
+        int timeStopperId = ((ClientWorldAccessor) this.world).getTimeStopperId();
         if (timeStopperId == -1 || timeStopperId == this.player.getId()) {
             return;
         }
