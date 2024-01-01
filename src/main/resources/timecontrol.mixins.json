@@ -11,6 +11,7 @@
     "ServerItemCooldownManagerMixin",
     "ServerPlayerEntityMixin",
     "ServerPlayNetworkHandlerMixin",
+    "TickManagerMixin",
     "ServerWorldMixin"
   ],
   "client": [

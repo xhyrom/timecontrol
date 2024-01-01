@@ -4,6 +4,7 @@ import dev.xhyrom.timecontrol.accessor.MinecraftServerAccessor;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
+import net.minecraft.server.network.ConnectedClientData;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +21,7 @@ public abstract class PlayerManagerMixin {
     private MinecraftServer server;
 
     @Inject(method={"onPlayerConnect"}, at={@At(value="TAIL")})
-    private void onGameJoin(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
+    private void onGameJoin(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci) {
         ((MinecraftServerAccessor)this.server).sendTimeStatus(player);
     }
 

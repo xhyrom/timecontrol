@@ -19,9 +19,9 @@ public abstract class ClientPlayerEntityMixin
 
     @Inject(method={"tick"}, at={@At(value="HEAD")}, cancellable=true)
     private void onTick(CallbackInfo ci) {
-        if (!(this.world instanceof ClientWorldAccessor)) return;
+        if (!(this.getWorld() instanceof ClientWorldAccessor)) return;
 
-        int timeStopperId = ((ClientWorldAccessor)(this.world)).getTimeStopperId();
+        int timeStopperId = ((ClientWorldAccessor)(this.getWorld())).getTimeStopperId();
         if (timeStopperId == -1 || timeStopperId == this.getId()) {
             return;
         }

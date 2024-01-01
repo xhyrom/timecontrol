@@ -33,12 +33,12 @@ public abstract class ServerPlayerEntityMixin
 
     @Inject(method={"moveToWorld"}, at={@At(value="INVOKE", target="Lnet/minecraft/server/PlayerManager;sendCommandTree(Lnet/minecraft/server/network/ServerPlayerEntity;)V", ordinal=0)})
     private void onCommandTree0(CallbackInfoReturnable<Entity> cir) {
-        ((MinecraftServerAccessor)this.world.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
+        ((MinecraftServerAccessor)this.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
     }
 
-    @Inject(method={"teleport"}, at={@At(value="INVOKE", target="Lnet/minecraft/server/PlayerManager;sendCommandTree(Lnet/minecraft/server/network/ServerPlayerEntity;)V", ordinal=0)})
+    @Inject(method={"teleport*"}, at={@At(value="INVOKE", target="Lnet/minecraft/server/PlayerManager;sendCommandTree(Lnet/minecraft/server/network/ServerPlayerEntity;)V", ordinal=0)})
     private void onCommandTree1(CallbackInfo ci) {
-        ((MinecraftServerAccessor)this.world.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
+        ((MinecraftServerAccessor)this.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
     }
 
     @Redirect(method={"playerTick"}, at=@At(value="INVOKE", target="Lnet/minecraft/entity/player/PlayerEntity;tick()V", ordinal=0))
