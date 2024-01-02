@@ -36,7 +36,7 @@ public abstract class ServerPlayerEntityMixin
         ((MinecraftServerAccessor)this.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
     }
 
-    @Inject(method={"teleport*"}, at={@At(value="INVOKE", target="Lnet/minecraft/server/PlayerManager;sendCommandTree(Lnet/minecraft/server/network/ServerPlayerEntity;)V", ordinal=0)})
+    @Inject(method="teleport(Lnet/minecraft/server/world/ServerWorld;DDDFF)V", at={@At(value="INVOKE", target="Lnet/minecraft/server/PlayerManager;sendCommandTree(Lnet/minecraft/server/network/ServerPlayerEntity;)V", ordinal=0)})
     private void onCommandTree1(CallbackInfo ci) {
         ((MinecraftServerAccessor)this.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
     }
