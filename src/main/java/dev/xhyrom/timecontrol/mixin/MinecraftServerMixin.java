@@ -2,6 +2,7 @@ package dev.xhyrom.timecontrol.mixin;
 
 import dev.xhyrom.timecontrol.TimeControlMod;
 import dev.xhyrom.timecontrol.accessor.MinecraftServerAccessor;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.ServerTickManager;

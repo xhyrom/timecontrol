@@ -1,6 +1,7 @@
 package dev.xhyrom.timecontrol.mixin;
 
 import dev.xhyrom.timecontrol.accessor.MinecraftServerAccessor;
+import net.minecraft.entity.Entity;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
@@ -26,7 +27,7 @@ public abstract class PlayerManagerMixin {
     }
 
     @Inject(method={"respawnPlayer"}, at={@At(value="TAIL")})
-    private void onGameJoin(ServerPlayerEntity player, boolean alive, CallbackInfoReturnable<ServerPlayerEntity> cir) {
+    private void onGameJoin(ServerPlayerEntity player, boolean alive, Entity.RemovalReason removalReason, CallbackInfoReturnable<ServerPlayerEntity> cir) {
         ((MinecraftServerAccessor)this.server).sendTimeStatus(player);
     }
 }
