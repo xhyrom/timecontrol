@@ -4,5 +4,7 @@
   "item.timecontrol.stopper": "Time Stopper",
   "itemGroup.timecontrol.item_group": "Time Control",
   "overlay.timecontrol.rate": "Time rate: %s",
-  "overlay.timecontrol.rate.stopped": "Time rate: %s (stopped)"
+  "overlay.timecontrol.rate.stopped": "Time rate: %s (stopped)",
+  "command.timecontrol.change": "Time rate is now %s",
+  "command.timecontrol.change.stopped": "Time rate is now %s (stopped)"
 }
