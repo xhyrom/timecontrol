@@ -29,7 +29,7 @@ public class ModCommands {
                                                         "command.timecontrol.change" + (isStopped(minecraftServerAccessor) ? ".stopped" : ""),
                                                         new DecimalFormat("#.######").format(minecraftServerAccessor.getTimeRate() * 100.0) + "%"
                                                 ),
-                                        false
+                                        true
                                 );
 
                                 return 1;
@@ -50,7 +50,7 @@ public class ModCommands {
                                         "command.timecontrol.change" + (isStopped(minecraftServerAccessor) ? ".stopped" : ""),
                                         new DecimalFormat("#.######").format(timeRate * 100.0) + "%"
                                 ),
-                        false
+                        true
                 );
 
                 return 1;
@@ -60,6 +60,7 @@ public class ModCommands {
     public static void init() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             dispatcher.register(literal("timecontrol")
+                    .requires(source -> source.hasPermissionLevel(2))
                     .then(build(TimeManipulationItem.Type.ACCELERATOR))
                     .then(build(TimeManipulationItem.Type.DECELERATOR))
                     .then(SET)
@@ -83,7 +84,7 @@ public class ModCommands {
                                             "command.timecontrol.change",
                                             new DecimalFormat("#.######").format(finalTimeRate * 100.0) + "%"
                                     ),
-                            false
+                            true
                     );
 
                     return 1;
