@@ -10,10 +10,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-    public static final TimeManipulationItem ACCELERATOR = new TimeManipulationItem(new Item.Settings().maxCount(1), TimeManipulationItem.Type.ACCELERATOR);
-    public static final TimeManipulationItem DECELERATOR = new TimeManipulationItem(new Item.Settings().maxCount(1), TimeManipulationItem.Type.DECELERATOR);
-    public static final TimeManipulationItem STOPPER = new TimeManipulationItem(new Item.Settings().maxCount(1), TimeManipulationItem.Type.STOPPER);
-    public static final ItemGroup ITEM_GROUP = FabricItemGroup.builder()
+    private static final TimeManipulationItem ACCELERATOR = new TimeManipulationItem(new Item.Settings().maxCount(1), TimeManipulationItem.Type.ACCELERATOR);
+    private static final TimeManipulationItem DECELERATOR = new TimeManipulationItem(new Item.Settings().maxCount(1), TimeManipulationItem.Type.DECELERATOR);
+    private static final TimeManipulationItem STOPPER = new TimeManipulationItem(new Item.Settings().maxCount(1), TimeManipulationItem.Type.STOPPER);
+    private static final ItemGroup ITEM_GROUP = FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.timecontrol.item_group"))
             .icon(() -> new ItemStack(ACCELERATOR))
             .entries((displayContext, entries) -> {
