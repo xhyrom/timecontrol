@@ -6,13 +6,19 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-    private static final TimeManipulationItem ACCELERATOR = new TimeManipulationItem(new Item.Settings().maxCount(1), TimeManipulationItem.Type.ACCELERATOR);
-    private static final TimeManipulationItem DECELERATOR = new TimeManipulationItem(new Item.Settings().maxCount(1), TimeManipulationItem.Type.DECELERATOR);
-    private static final TimeManipulationItem STOPPER = new TimeManipulationItem(new Item.Settings().maxCount(1), TimeManipulationItem.Type.STOPPER);
+    private static final RegistryKey<Item> ACCELERATOR_KEY = key("accelerator");
+    private static final RegistryKey<Item> DECELERATOR_KEY = key("decelerator");
+    private static final RegistryKey<Item> STOPPER_KEY = key("stopper");
+
+    private static final TimeManipulationItem ACCELERATOR = new TimeManipulationItem(new Item.Settings().registryKey(ACCELERATOR_KEY).maxCount(1), TimeManipulationItem.Type.ACCELERATOR);
+    private static final TimeManipulationItem DECELERATOR = new TimeManipulationItem(new Item.Settings().registryKey(DECELERATOR_KEY).maxCount(1), TimeManipulationItem.Type.DECELERATOR);
+    private static final TimeManipulationItem STOPPER = new TimeManipulationItem(new Item.Settings().registryKey(STOPPER_KEY).maxCount(1), TimeManipulationItem.Type.STOPPER);
     private static final ItemGroup ITEM_GROUP = FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.timecontrol.item_group"))
             .icon(() -> new ItemStack(ACCELERATOR))
@@ -28,5 +34,9 @@ public class ModItems {
         Registry.register(Registries.ITEM, Identifier.of("timecontrol", "decelerator"), DECELERATOR);
         Registry.register(Registries.ITEM, Identifier.of("timecontrol", "stopper"), STOPPER);
         Registry.register(Registries.ITEM_GROUP, Identifier.of("timecontrol", "item_group"), ITEM_GROUP);
+    }
+
+    private static RegistryKey<Item> key(final String path) {
+        return RegistryKey.of(RegistryKeys.ITEM, Identifier.of("timecontrol", path));
     }
 }

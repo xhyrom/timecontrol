@@ -4,10 +4,9 @@ import dev.xhyrom.timecontrol.accessor.MinecraftServerAccessor;
 import dev.xhyrom.timecontrol.accessor.ServerItemCooldownManagerAccessor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -20,7 +19,7 @@ public class TimeManipulationItem extends Item {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
+    public ActionResult use(World world, PlayerEntity playerEntity, Hand hand) {
         if (!world.isClient) {
             MinecraftServerAccessor minecraftServerAccessor = (MinecraftServerAccessor)world.getServer();
             if (this.type == Type.STOPPER) {
@@ -32,7 +31,7 @@ public class TimeManipulationItem extends Item {
             }
             ((ServerItemCooldownManagerAccessor)playerEntity.getItemCooldownManager()).setTimeManipulationTime(System.currentTimeMillis());
         }
-        return TypedActionResult.success(playerEntity.getStackInHand(hand));
+        return ActionResult.SUCCESS;
     }
 
     public enum Type {

@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import dev.xhyrom.timecontrol.accessor.MinecraftServerAccessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -16,8 +17,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Set;
 
 @Mixin(value={ServerPlayerEntity.class})
 public abstract class ServerPlayerEntityMixin
@@ -33,12 +35,12 @@ public abstract class ServerPlayerEntityMixin
         super(world, pos, yaw, profile);
     }
 
-    @Inject(method="teleport(Lnet/minecraft/server/world/ServerWorld;DDDFF)V", at={@At(value="INVOKE", target="Lnet/minecraft/server/network/ServerPlayNetworkHandler;requestTeleport(DDDFF)V", ordinal=0)})
-    private void onCommandTree0(ServerWorld targetWorld, double x, double y, double z, float yaw, float pitch, CallbackInfo ci) {
+    @Inject(method="teleport", at={@At(value="INVOKE", target="Lnet/minecraft/entity/player/PlayerEntity;teleport(Lnet/minecraft/server/world/ServerWorld;DDDLjava/util/Set;FFZ)Z", ordinal=0)})
+    private void onCommandTree0(ServerWorld world, double destX, double destY, double destZ, Set<PositionFlag> flags, float yaw, float pitch, boolean resetCamera, CallbackInfoReturnable<Boolean> cir) {
         ((MinecraftServerAccessor)this.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
     }
 
-    @Inject(method="teleportTo", at={@At(value="INVOKE", target="Lnet/minecraft/server/PlayerManager;sendCommandTree(Lnet/minecraft/server/network/ServerPlayerEntity;)V", ordinal=0)})
+    @Inject(method= "teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/server/network/ServerPlayerEntity;", at={@At(value="INVOKE", target="Lnet/minecraft/server/PlayerManager;sendCommandTree(Lnet/minecraft/server/network/ServerPlayerEntity;)V", ordinal=0)})
     private void onCommandTree1(TeleportTarget teleportTarget, CallbackInfoReturnable<Entity> cir) {
         ((MinecraftServerAccessor)this.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
     }

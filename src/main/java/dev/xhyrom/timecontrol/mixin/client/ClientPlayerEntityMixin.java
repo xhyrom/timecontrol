@@ -31,8 +31,7 @@ public abstract class ClientPlayerEntityMixin
         this.prevStrideDistance = 0.0f;
         this.stepBobbingAmount = 0.0f;
         this.prevStepBobbingAmount = 0.0f;
-        this.horizontalSpeed = 0.0f;
-        this.prevHorizontalSpeed = 0.0f;
+        this.setMovementSpeed(0.0f);
         if (this.hurtTime > 0) {
             --this.hurtTime;
         }
