@@ -28,9 +28,7 @@ public abstract class ClientPlayerEntityMixin
         ci.cancel();
         this.resetPosition();
         this.strideDistance = 0.0f;
-        this.prevStrideDistance = 0.0f;
-        this.stepBobbingAmount = 0.0f;
-        this.prevStepBobbingAmount = 0.0f;
+        this.lastStrideDistance = 0.0f;
         this.setMovementSpeed(0.0f);
         if (this.hurtTime > 0) {
             --this.hurtTime;

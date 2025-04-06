@@ -36,7 +36,7 @@ public abstract class MinecraftClientMixin {
 
         ClientWorldAccessor clientWorldAccessor = (ClientWorldAccessor)(this.world);
 
-        if (!(player.getInventory().getMainHandStack().getItem() instanceof TimeManipulationItem)) return;
+        if (!(player.getInventory().getSelectedStack().getItem() instanceof TimeManipulationItem)) return;
 
         if (clientWorldAccessor.getTimeStopperId() != -1) {
             this.inGameHud.setOverlayMessage(

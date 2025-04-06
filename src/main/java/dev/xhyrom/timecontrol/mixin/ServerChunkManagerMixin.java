@@ -27,7 +27,7 @@ public abstract class ServerChunkManagerMixin {
     private SpawnHelper.Info spawnInfo;
     private boolean skipIteration = false;
 
-    @Redirect(method={"tickChunks(Lnet/minecraft/util/profiler/Profiler;JLjava/util/List;)V"}, at=@At(value="INVOKE", target="Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z", ordinal=0))
+    @Redirect(method={"tickChunks(Lnet/minecraft/util/profiler/Profiler;J)V"}, at=@At(value="INVOKE", target="Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z", ordinal=0))
     private boolean redirectGetBoolean(GameRules gameRules, GameRules.Key<GameRules.BooleanRule> rule) {
         if (((MinecraftServerAccessor)this.world.getServer()).getTimeStopper() != null) {
             return false;
@@ -35,7 +35,7 @@ public abstract class ServerChunkManagerMixin {
         return gameRules.getBoolean(rule);
     }
 
-    @Redirect(method={"tickChunks(Lnet/minecraft/util/profiler/Profiler;JLjava/util/List;)V"}, at=@At(value="INVOKE", target = "Lnet/minecraft/world/SpawnHelper;setupSpawn(ILjava/lang/Iterable;Lnet/minecraft/world/SpawnHelper$ChunkSource;Lnet/minecraft/world/SpawnDensityCapper;)Lnet/minecraft/world/SpawnHelper$Info;", ordinal=0))
+    @Redirect(method={"tickChunks(Lnet/minecraft/util/profiler/Profiler;J)V"}, at=@At(value="INVOKE", target = "Lnet/minecraft/world/SpawnHelper;setupSpawn(ILjava/lang/Iterable;Lnet/minecraft/world/SpawnHelper$ChunkSource;Lnet/minecraft/world/SpawnDensityCapper;)Lnet/minecraft/world/SpawnHelper$Info;", ordinal=0))
     private SpawnHelper.Info redirectSetupSpawn(int spawningChunkCount, Iterable<Entity> entities, SpawnHelper.ChunkSource chunkSource, SpawnDensityCapper spawnDensityCapper) {
         if (((MinecraftServerAccessor)world.getServer()).getTimeStopper() != null) {
             return spawnInfo;
@@ -45,7 +45,7 @@ public abstract class ServerChunkManagerMixin {
     }
 
     @Redirect(
-            method = "tickChunks(Lnet/minecraft/util/profiler/Profiler;JLjava/util/List;)V",
+            method = "tickChunks(Lnet/minecraft/util/profiler/Profiler;J)V",
             at = @At(
                     value = "INVOKE",
                     target = "Ljava/util/Iterator;hasNext()Z",
@@ -62,7 +62,7 @@ public abstract class ServerChunkManagerMixin {
     }
 
     @Redirect(
-            method = "tickChunks(Lnet/minecraft/util/profiler/Profiler;JLjava/util/List;)V",
+            method = "tickChunks(Lnet/minecraft/util/profiler/Profiler;J)V",
             at = @At(
                     value = "INVOKE",
                     target = "Ljava/util/Iterator;next()Ljava/lang/Object;",
