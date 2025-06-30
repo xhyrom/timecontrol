@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import dev.xhyrom.timecontrol.accessor.MinecraftServerAccessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.packet.c2s.common.SyncedClientOptions;
 import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -31,8 +32,8 @@ public abstract class ServerPlayerEntityMixin
     @Shadow
     public abstract void tick();
 
-    public ServerPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
-        super(world, pos, yaw, profile);
+    public ServerPlayerEntityMixin(MinecraftServer server, ServerWorld world, GameProfile profile, SyncedClientOptions clientOptions) {
+        super(world, profile);
     }
 
     @Inject(method="teleport", at={@At(value="INVOKE", target="Lnet/minecraft/entity/player/PlayerEntity;teleport(Lnet/minecraft/server/world/ServerWorld;DDDLjava/util/Set;FFZ)Z", ordinal=0)})
