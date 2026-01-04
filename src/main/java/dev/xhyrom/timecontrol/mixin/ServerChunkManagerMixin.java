@@ -4,10 +4,11 @@ import dev.xhyrom.timecontrol.accessor.MinecraftServerAccessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerChunkManager;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.SpawnDensityCapper;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.chunk.WorldChunk;
+import net.minecraft.world.rule.GameRule;
+import net.minecraft.world.rule.GameRules;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,12 +28,12 @@ public abstract class ServerChunkManagerMixin {
     private SpawnHelper.Info spawnInfo;
     private boolean skipIteration = false;
 
-    @Redirect(method={"tickChunks(Lnet/minecraft/util/profiler/Profiler;J)V"}, at=@At(value="INVOKE", target="Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z", ordinal=0))
-    private boolean redirectGetBoolean(GameRules gameRules, GameRules.Key<GameRules.BooleanRule> rule) {
+    @Redirect(method={"tickChunks(Lnet/minecraft/util/profiler/Profiler;J)V"}, at=@At(value="INVOKE", target="Lnet/minecraft/world/rule/GameRules;getValue(Lnet/minecraft/world/rule/GameRule;)Ljava/lang/Object;", ordinal=0))
+    private Object redirectGetBoolean(GameRules gameRules, GameRule<Boolean> key) {
         if (((MinecraftServerAccessor)this.world.getServer()).getTimeStopper() != null) {
             return false;
         }
-        return gameRules.getBoolean(rule);
+        return gameRules.getValue(key);
     }
 
     @Redirect(method={"tickChunks(Lnet/minecraft/util/profiler/Profiler;J)V"}, at=@At(value="INVOKE", target = "Lnet/minecraft/world/SpawnHelper;setupSpawn(ILjava/lang/Iterable;Lnet/minecraft/world/SpawnHelper$ChunkSource;Lnet/minecraft/world/SpawnDensityCapper;)Lnet/minecraft/world/SpawnHelper$Info;", ordinal=0))

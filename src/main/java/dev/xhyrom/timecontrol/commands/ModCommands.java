@@ -4,6 +4,8 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import dev.xhyrom.timecontrol.accessor.MinecraftServerAccessor;
 import dev.xhyrom.timecontrol.items.TimeManipulationItem;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.command.permission.Permission;
+import net.minecraft.command.permission.PermissionLevel;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -60,7 +62,7 @@ public class ModCommands {
     public static void init() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             dispatcher.register(literal("timecontrol")
-                    .requires(source -> source.hasPermissionLevel(2))
+                    .requires(source -> source.getPermissions().hasPermission(new Permission.Level(PermissionLevel.ADMINS)))
                     .then(build(TimeManipulationItem.Type.ACCELERATOR))
                     .then(build(TimeManipulationItem.Type.DECELERATOR))
                     .then(SET)
