@@ -27,7 +27,7 @@ public abstract class ServerPlayerEntityMixin
         extends PlayerEntity {
     @Shadow
     @Final
-    public MinecraftServer server;
+    private MinecraftServer server;
 
     @Shadow
     public abstract void tick();
@@ -38,12 +38,12 @@ public abstract class ServerPlayerEntityMixin
 
     @Inject(method="teleport", at={@At(value="INVOKE", target="Lnet/minecraft/entity/player/PlayerEntity;teleport(Lnet/minecraft/server/world/ServerWorld;DDDLjava/util/Set;FFZ)Z", ordinal=0)})
     private void onCommandTree0(ServerWorld world, double destX, double destY, double destZ, Set<PositionFlag> flags, float yaw, float pitch, boolean resetCamera, CallbackInfoReturnable<Boolean> cir) {
-        ((MinecraftServerAccessor)this.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
+        ((MinecraftServerAccessor)server).sendTimeStatus((ServerPlayerEntity) (Object) this);
     }
 
     @Inject(method= "teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/server/network/ServerPlayerEntity;", at={@At(value="INVOKE", target="Lnet/minecraft/server/PlayerManager;sendCommandTree(Lnet/minecraft/server/network/ServerPlayerEntity;)V", ordinal=0)})
     private void onCommandTree1(TeleportTarget teleportTarget, CallbackInfoReturnable<Entity> cir) {
-        ((MinecraftServerAccessor)this.getServer()).sendTimeStatus((ServerPlayerEntity) (Object) this);
+        ((MinecraftServerAccessor)server).sendTimeStatus((ServerPlayerEntity) (Object) this);
     }
 
     @Redirect(method={"playerTick"}, at=@At(value="INVOKE", target="Lnet/minecraft/entity/player/PlayerEntity;tick()V", ordinal=0))

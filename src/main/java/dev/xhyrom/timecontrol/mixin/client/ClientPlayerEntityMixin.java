@@ -19,16 +19,14 @@ public abstract class ClientPlayerEntityMixin
 
     @Inject(method={"tick"}, at={@At(value="HEAD")}, cancellable=true)
     private void onTick(CallbackInfo ci) {
-        if (!(this.getWorld() instanceof ClientWorldAccessor)) return;
+        if (!(this.getEntityWorld() instanceof ClientWorldAccessor)) return;
 
-        int timeStopperId = ((ClientWorldAccessor)(this.getWorld())).getTimeStopperId();
+        int timeStopperId = ((ClientWorldAccessor)(this.getEntityWorld())).getTimeStopperId();
         if (timeStopperId == -1 || timeStopperId == this.getId()) {
             return;
         }
         ci.cancel();
         this.resetPosition();
-        this.strideDistance = 0.0f;
-        this.lastStrideDistance = 0.0f;
         this.setMovementSpeed(0.0f);
         if (this.hurtTime > 0) {
             --this.hurtTime;

@@ -37,7 +37,7 @@ public abstract class ParticleManagerMixin {
         this.newParticles.clear();
     }
 
-    @ModifyVariable(method = {"renderParticles(Lnet/minecraft/client/render/Camera;FLnet/minecraft/client/render/VertexConsumerProvider$Immediate;)V"}, at = @At(value = "HEAD"), ordinal = 0, argsOnly = true)
+    @ModifyVariable(method = {"addToBatch"}, at = @At(value = "HEAD"), ordinal = 0, argsOnly = true)
     private float modifyTickDelta(float tickDelta) {
         int timeStopperId;
         if (this.world != null && (this.world instanceof ClientWorldAccessor) && (timeStopperId = ((ClientWorldAccessor)this.world).getTimeStopperId()) != -1) {

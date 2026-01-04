@@ -20,7 +20,7 @@ public class TimeManipulationItem extends Item {
 
     @Override
     public ActionResult use(World world, PlayerEntity playerEntity, Hand hand) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             MinecraftServerAccessor minecraftServerAccessor = (MinecraftServerAccessor)world.getServer();
             if (this.type == Type.STOPPER) {
                 minecraftServerAccessor.setTimeStopper(minecraftServerAccessor.getTimeStopper() == null ? (ServerPlayerEntity) playerEntity : null);
